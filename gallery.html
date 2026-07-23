@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Creation Events Mumbai</title>
+  <meta name="description" content="View portfolio images of our luxurious events in Mumbai. Browse wedding setups, premium birthdays, corporate stages, and traditional ceremonies.">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- FontAwesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sticky Glass Navbar -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="index.html" class="logo">
+          CREATION <span class="logo-gold">EVENTS</span>
+        </a>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="services.html" class="nav-link">Services</a></li>
+          <li><a href="games.html" class="nav-link">Games & Activities</a></li>
+          <li><a href="gallery.html" class="nav-link active">Gallery</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="nav-cta">
+          <a href="contact.html" class="btn btn-secondary" style="padding: 0.6rem 1.5rem; font-size: 0.8rem;">Get a Quote</a>
+        </div>
+        <div class="mobile-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Hero Banner -->
+  <section class="page-hero">
+    <img src="assets/hero_bg.png" alt="Luxury Banquet Decoration Showcase" class="page-hero-bg">
+    <div class="container">
+      <div class="page-hero-content reveal">
+        <span class="subtitle">Our Visual Portfolio</span>
+        <h1 class="page-hero-title">Event <span class="gold-text">Gallery</span></h1>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section class="gallery-section section-padding">
+    <div class="container">
+      <!-- Gallery Filter Controls -->
+      <div class="gallery-filter reveal">
+        <button class="filter-btn active" data-filter="all">All Events</button>
+        <button class="filter-btn" data-filter="weddings">Weddings</button>
+        <button class="filter-btn" data-filter="birthdays">Birthdays</button>
+        <button class="filter-btn" data-filter="corporate">Corporate</button>
+        <button class="filter-btn" data-filter="ceremonies">Ceremonies</button>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid reveal delay-100">
+        <!-- Item 1 (Weddings) -->
+        <div class="gallery-item" data-category="weddings">
+          <img src="assets/wedding_event.png" alt="Grand Royal Mandap Decor">
+          <div class="gallery-overlay">
+            <h4>Royal Mandap</h4>
+            <span>Weddings</span>
+          </div>
+        </div>
+
+        <!-- Item 2 (Birthdays) -->
+        <div class="gallery-item" data-category="birthdays">
+          <img src="assets/birthday_decoration.png" alt="Happy Birthday Neon Wall Backdrop">
+          <div class="gallery-overlay">
+            <h4>Neon Gold Party</h4>
+            <span>Birthdays</span>
+          </div>
+        </div>
+
+        <!-- Item 3 (Ceremonies) -->
+        <div class="gallery-item" data-category="ceremonies">
+          <img src="assets/baby_shower.png" alt="Pastel Cloud Baby Shower Setup">
+          <div class="gallery-overlay">
+            <h4>Dream Baby Shower</h4>
+            <span>Ceremonies</span>
+          </div>
+        </div>
+
+        <!-- Item 4 (Ceremonies - Haldi) -->
+        <div class="gallery-item" data-category="ceremonies">
+          <img src="assets/haldi_ceremony.png" alt="Haldi Traditional Swing Setup">
+          <div class="gallery-overlay">
+            <h4>Bright Haldi Ceremony</h4>
+            <span>Ceremonies</span>
+          </div>
+        </div>
+
+        <!-- Item 5 (Ceremonies - Mehendi) -->
+        <div class="gallery-item" data-category="ceremonies">
+          <img src="assets/mehendi_ceremony.png" alt="Mehendi Swing Backdrop and Seating">
+          <div class="gallery-overlay">
+            <h4>Bohemian Mehendi Setup</h4>
+            <span>Ceremonies</span>
+          </div>
+        </div>
+
+        <!-- Item 6 (Corporate) -->
+        <div class="gallery-item" data-category="corporate">
+          <img src="assets/corporate_event.png" alt="Visionary Summit Stage Build">
+          <div class="gallery-overlay">
+            <h4>Visionary Leadership Summit</h4>
+            <span>Corporate</span>
+          </div>
+        </div>
+
+        <!-- Item 7 (Corporate - Sound) -->
+        <div class="gallery-item" data-category="corporate">
+          <img src="assets/sound_system.png" alt="Gala Concert Speakers and Lights">
+          <div class="gallery-overlay">
+            <h4>Premium Live Sound System</h4>
+            <span>Corporate</span>
+          </div>
+        </div>
+
+        <!-- Item 8 (Birthdays/Corporate - Games Zinga) -->
+        <div class="gallery-item" data-category="birthdays">
+          <img src="assets/games_zinga.png" alt="Lawn Games Giant Jenga block tower">
+          <div class="gallery-overlay">
+            <h4>Giant Wood Jenga</h4>
+            <span>Birthdays</span>
+          </div>
+        </div>
+
+        <!-- Item 9 (Birthdays/Corporate - Games Shooting) -->
+        <div class="gallery-item" data-category="corporate">
+          <img src="assets/balloon_shooting.png" alt="Premium Balloon Shooting Gallery Setup">
+          <div class="gallery-overlay">
+            <h4>Luxury Carnival Shooting Range</h4>
+            <span>Corporate</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal Overlay -->
+  <div class="lightbox">
+    <div class="lightbox-content">
+      <span class="lightbox-close"><i class="fas fa-times"></i></span>
+      <img src="" alt="" class="lightbox-img">
+      <div class="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp Widget -->
+  <a href="https://wa.me/919999999999?text=Hi%20Creation%20Events,%20I%20would%20like%20to%20inquire%20about%20booking%20an%20event." target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <a href="index.html" class="logo footer-logo">
+            CREATION <span class="logo-gold">EVENTS</span>
+          </a>
+          <p class="footer-desc">A premium luxury event management company in Mumbai. Crafting exquisite weddings, corporate galas, and bespoke parties.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+            <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="games.html">Games & Activities</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Services</h3>
+          <ul class="footer-links">
+            <li><a href="services.html">Wedding Planning</a></li>
+            <li><a href="services.html">Birthday Decors</a></li>
+            <li><a href="services.html">Baby Showers</a></li>
+            <li><a href="services.html">Haldi & Mehendi</a></li>
+            <li><a href="services.html">Corporate Events</a></li>
+            <li><a href="services.html">Sound Systems</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Info</h3>
+          <ul class="footer-contact-info">
+            <li>
+              <span><i class="fas fa-map-marker-alt"></i></span>
+              Office 402, Luxury Heights, Link Road, Andheri West, Mumbai - 400053
+            </li>
+            <li>
+              <span><i class="fas fa-phone-alt"></i></span>
+              <a href="tel:+919999999999">+91 99999 99999</a>
+            </li>
+            <li>
+              <span><i class="fas fa-envelope"></i></span>
+              <a href="mailto:info@creationevents.in">info@creationevents.in</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Creation Events. All rights reserved. Designed with luxury in mind.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript File -->
+  <script src="js/main.js"></script>
+</body>
+</html>
