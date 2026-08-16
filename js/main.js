@@ -373,13 +373,44 @@ function initContactForm() {
       return;
     }
 
-    // Front-end simulation submission
+    // Check if Firebase is initialized
+    if (!window.firebaseModule || window.firebaseModule.initError) {
+      const errorMsg = window.firebaseModule?.initError?.message || "Firebase is not initialized.";
+      showStatus('Submission failed: ' + errorMsg, 'error');
+      return;
+    }
+
+    const { db, collection, addDoc, serverTimestamp } = window.firebaseModule;
+    const eventTypeSelect = document.getElementById('event-type');
+    const eventDateInput = document.getElementById('event-date');
+    
+    const eventType = eventTypeSelect ? eventTypeSelect.value : '';
+    const eventDate = eventDateInput ? eventDateInput.value : '';
+
     showStatus('Sending your request...', 'info');
 
-    setTimeout(() => {
+    const data = {
+      name,
+      phone,
+      email,
+      eventType,
+      eventDate,
+      message,
+      createdAt: serverTimestamp()
+    };
+
+    const contactPromise = addDoc(collection(db, "contactMessages"), data);
+    const bookingPromise = addDoc(collection(db, "bookings"), data);
+
+    Promise.all([contactPromise, bookingPromise])
+    .then(() => {
       showStatus('Thank you! Your message has been sent. Our team will contact you shortly.', 'success');
       contactForm.reset();
-    }, 1500);
+    })
+    .catch((error) => {
+      console.error("Firestore write error: ", error);
+      showStatus('Failed to send message: ' + (error.message || error), 'error');
+    });
   });
 
   function showStatus(msg, type) {
