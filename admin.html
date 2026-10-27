@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Creation Events Mumbai</title>
+  <meta name="description"
+    content="Secure Administrative Portal for Creation Events Mumbai to manage customer inquiries and event bookings.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Admin Stylesheet -->
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+
+<body>
+
+  <!-- ======================================================================
+       1. ADMIN LOGIN SCREEN (Displayed when unauthenticated)
+       ====================================================================== -->
+  <div id="admin-login-screen" class="admin-login-wrapper">
+    <div class="login-card">
+      <div class="login-brand">
+        <div class="brand-badge">
+          <i class="fas fa-shield-alt"></i> Secure Portal
+        </div>
+        <h1>CREATION <span>EVENTS</span></h1>
+        <p>Administrative Dashboard Login</p>
+      </div>
+
+      <!-- Status Notification Box -->
+      <div id="login-status-box" class="login-status-box"></div>
+
+      <form id="admin-login-form" class="login-form" novalidate>
+        <div class="form-group">
+          <label for="login-email">Admin Email Address</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-envelope prefix-icon"></i>
+            <input type="email" id="login-email" placeholder="admin@creationevents.com" required
+              autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Master Password</label>
+          <div class="input-icon-wrap">
+            <i class="fas fa-lock prefix-icon"></i>
+            <input type="password" id="login-password" placeholder="••••••••••••" required
+              autocomplete="current-password">
+            <button type="button" id="toggle-password-visibility" class="toggle-password"
+              title="Toggle password visibility">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn" class="btn-admin-primary">
+          <i class="fas fa-lock"></i> Sign In to Dashboard
+        </button>
+      </form>
+
+      <div class="login-notice">
+        <p><i class="fas fa-user-lock"></i> Authorized admin accounts only. Public registration is disabled.</p>
+        <p style="margin-top: 0.75rem;">
+          <a href="index.html"><i class="fas fa-arrow-left"></i> Return to Creation Events Website</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       2. ADMIN DASHBOARD SCREEN (Displayed upon successful authentication)
+       ====================================================================== -->
+  <div id="admin-dashboard-screen" class="admin-dashboard-wrapper">
+
+    <!-- Top Sticky Navigation Bar -->
+    <header class="admin-navbar">
+      <div class="admin-nav-container">
+        <div class="admin-nav-brand">
+          <a href="admin.html" class="admin-nav-logo">
+            CREATION <span>EVENTS</span>
+          </a>
+          <span class="admin-badge"><i class="fas fa-shield-alt"></i> Admin Panel</span>
+        </div>
+
+        <div class="admin-nav-actions">
+          <div class="admin-user-pill">
+            <i class="fas fa-user-shield"></i>
+            <span id="admin-user-email">admin@creationevents.com</span>
+          </div>
+          <a href="index.html" target="_blank" rel="noopener noreferrer" class="btn-nav-outline"
+            title="Open Public Website in new tab">
+            <i class="fas fa-external-link-alt"></i> Live Site
+          </a>
+          <button type="button" id="btn-logout" class="btn-logout" title="Log out from Admin Dashboard">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Dashboard Area -->
+    <main class="admin-main">
+
+      <!-- Alert Container -->
+      <div id="admin-alert-container"></div>
+
+      <!-- Dashboard Hero Header -->
+      <section class="admin-hero">
+        <div class="admin-hero-title">
+          <h2>Customer Inquiries & Event Bookings</h2>
+          <p>Real-time submissions captured from the Creation Events contact and booking forms.</p>
+        </div>
+        <div class="admin-hero-actions">
+          <button type="button" id="btn-refresh-data" class="btn-action-secondary"
+            title="Fetch latest submissions from Firestore">
+            <i class="fas fa-sync-alt"></i> Refresh Data
+          </button>
+          <button type="button" id="btn-export-csv" class="btn-action-secondary"
+            title="Download current submissions as CSV file">
+            <i class="fas fa-file-csv"></i> Export CSV
+          </button>
+        </div>
+      </section>
+
+      <!-- KPI Metrics Grid -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-label">Total Submissions</div>
+            <div class="stat-value" id="kpi-total-submissions">0</div>
+          </div>
+          <div class="stat-icon">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-label">Bookings</div>
+            <div class="stat-value" id="kpi-bookings-count">0</div>
+          </div>
+          <div class="stat-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-label">Contact Messages</div>
+            <div class="stat-value" id="kpi-messages-count">0</div>
+          </div>
+          <div class="stat-icon">
+            <i class="fas fa-envelope-open-text"></i>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-info">
+            <div class="stat-label">Received Today</div>
+            <div class="stat-value" id="kpi-today-count">0</div>
+          </div>
+          <div class="stat-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+        </div>
+      </section>
+
+      <!-- Submissions Data & Filter Section -->
+      <section class="controls-panel">
+
+        <!-- Tab Switcher -->
+        <div class="tabs-row">
+          <div class="tabs-group">
+            <button type="button" class="tab-btn active" data-tab="all">
+              <i class="fas fa-layer-group"></i> All Submissions
+              <span class="tab-count" id="tab-count-all">0</span>
+            </button>
+            <button type="button" class="tab-btn" data-tab="bookings">
+              <i class="fas fa-calendar-alt"></i> Bookings
+              <span class="tab-count" id="tab-count-bookings">0</span>
+            </button>
+            <button type="button" class="tab-btn" data-tab="contactMessages">
+              <i class="fas fa-comments"></i> Contact Messages
+              <span class="tab-count" id="tab-count-messages">0</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Search and Filter Bar -->
+        <div class="filters-row">
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-submissions"
+              placeholder="Search by customer name, phone, email, or message...">
+          </div>
+
+          <div class="filter-actions">
+            <select id="filter-event-type" class="filter-select">
+              <option value="">All Event Types</option>
+              <option value="Wedding Planning">Wedding Planning</option>
+              <option value="Birthday Decors">Birthday Decors</option>
+              <option value="Baby Showers">Baby Showers</option>
+              <option value="Haldi & Mehendi">Haldi & Mehendi</option>
+              <option value="Corporate Events">Corporate Events</option>
+              <option value="Sound Systems">Sound Systems</option>
+              <option value="Other">Other Events</option>
+            </select>
+
+            <select id="filter-sort" class="filter-select">
+              <option value="newest">Sort: Newest First</option>
+              <option value="oldest">Sort: Oldest First</option>
+            </select>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Submissions Table Card -->
+      <section class="data-container">
+        <div class="table-responsive">
+          <table class="admin-table" id="submissions-table">
+            <thead>
+              <tr>
+                <th>Date & Source</th>
+                <th>Customer Name</th>
+                <th>Contact Details</th>
+                <th>Event Type & Date</th>
+                <th>Message Snippet</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="submissions-tbody">
+              <!-- Dynamically populated by js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ======================================================================
+       3. SUBMISSION DETAILS MODAL
+       ====================================================================== -->
+  <div id="submission-details-modal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Customer Inquiry Details</h3>
+        <button type="button" id="modal-close-btn" class="modal-close-btn" title="Close Modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-info-grid">
+          <div class="info-item">
+            <div class="info-label">Customer Name</div>
+            <div class="info-val" id="modal-customer-name">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Phone Number</div>
+            <div class="info-val" id="modal-customer-phone">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Email Address</div>
+            <div class="info-val" id="modal-customer-email">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Event Type</div>
+            <div class="info-val" id="modal-event-type">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Requested Event Date</div>
+            <div class="info-val" id="modal-event-date">-</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label">Source Collection</div>
+            <div class="info-val" id="modal-collection">-</div>
+          </div>
+          <div class="info-item" style="grid-column: 1 / -1;">
+            <div class="info-label">Submission Timestamp</div>
+            <div class="info-val" id="modal-created-at">-</div>
+          </div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Customer Message / Requirements</div>
+          <div class="message-box">
+            <p id="modal-message-text">-</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <div class="modal-quick-actions">
+          <a href="#" id="modal-btn-whatsapp" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-chat">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+          <a href="#" id="modal-btn-call" class="btn-call">
+            <i class="fas fa-phone-alt"></i> Call Customer
+          </a>
+          <a href="#" id="modal-btn-email" class="btn-nav-outline">
+            <i class="fas fa-envelope"></i> Send Email
+          </a>
+        </div>
+        <button type="button" class="btn-nav-outline"
+          onclick="window.adminApp.closeModal ? window.adminApp.closeModal() : document.getElementById('submission-details-modal').classList.remove('active')">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK Compat (Matching existing version 10.8.0) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- Reuse existing Firebase project configuration -->
+  <script src="js/firebase.js"></script>
+
+  <!-- Admin Controller -->
+  <script src="js/admin.js"></script>
+</body>
+
+</html>

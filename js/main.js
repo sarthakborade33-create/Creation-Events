@@ -383,7 +383,7 @@ function initContactForm() {
     const { db, collection, addDoc, serverTimestamp } = window.firebaseModule;
     const eventTypeSelect = document.getElementById('event-type');
     const eventDateInput = document.getElementById('event-date');
-    
+
     const eventType = eventTypeSelect ? eventTypeSelect.value : '';
     const eventDate = eventDateInput ? eventDateInput.value : '';
 
@@ -403,14 +403,14 @@ function initContactForm() {
     const bookingPromise = addDoc(collection(db, "bookings"), data);
 
     Promise.all([contactPromise, bookingPromise])
-    .then(() => {
-      showStatus('Thank you! Your message has been sent. Our team will contact you shortly.', 'success');
-      contactForm.reset();
-    })
-    .catch((error) => {
-      console.error("Firestore write error: ", error);
-      showStatus('Failed to send message: ' + (error.message || error), 'error');
-    });
+      .then(() => {
+        showStatus('Thank you! Your message has been sent. Our team will contact you shortly.', 'success');
+        contactForm.reset();
+      })
+      .catch((error) => {
+        console.error("Firestore write error: ", error);
+        showStatus('Failed to send message: ' + (error.message || error), 'error');
+      });
   });
 
   function showStatus(msg, type) {

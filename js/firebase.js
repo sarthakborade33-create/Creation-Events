@@ -1,4 +1,4 @@
-(function() {
+(function () {
   const firebaseConfig = {
     apiKey: "AIzaSyCRySmcQXF9ZVmz9iHavnOKiTeP0F6H_l8",
     authDomain: "creation-events.firebaseapp.com",
@@ -23,13 +23,13 @@
   // Expose firestore references to the global scope
   window.firebaseModule = {
     db,
-    collection: function(dbInstance, collectionName) {
+    collection: function (dbInstance, collectionName) {
       return dbInstance.collection(collectionName);
     },
-    addDoc: function(collectionRef, docData) {
+    addDoc: function (collectionRef, docData) {
       return collectionRef.add(docData);
     },
-    serverTimestamp: function() {
+    serverTimestamp: function () {
       return firebase.firestore.FieldValue.serverTimestamp();
     },
     initError

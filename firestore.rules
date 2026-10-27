@@ -2,14 +2,16 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // 1. Allow public creation of contact messages, but deny read/update/delete
+    // 1. Allow public creation of contact messages; allow authenticated admins to read and delete
     match /contactMessages/{message} {
       allow create: if true;
+      allow read, delete: if request.auth != null;
     }
 
-    // 2. Allow public creation of bookings, but deny read/update/delete
+    // 2. Allow public creation of bookings; allow authenticated admins to read and delete
     match /bookings/{booking} {
       allow create: if true;
+      allow read, delete: if request.auth != null;
     }
 
     // 3. Deny all other reads, writes, and database collections access by default
